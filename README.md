@@ -3,11 +3,11 @@ NEM NODE (NIS) Docker
 
 To run for **mainnet**:
 
-`docker run -d -p -p 7890:7890 -p 7778:7778 -v ./nem-node/mainnet:/root/nem --name nem-mainnet criptalia/nem-node`
+`docker run -d -p 7890:7890 -p 7778:7778 -v /nem-node/mainnet:/root/nem --name nem-mainnet criptalia/nem-node`
 
 To run **testnet**:
 
-`docker run -e NEM_NETWORK=testnet -d -p 7890:7890 -p 7778:7778 -v ./nem-node/testnet:/root/nem --name nem-testnet criptalia/nem-node`
+`docker run -e NEM_NETWORK=testnet -d -p 7890:7890 -p 7778:7778 -v /nem-node/testnet:/root/nem --name nem-testnet criptalia/nem-node`
 
 To run with `docker-compose`:
 
