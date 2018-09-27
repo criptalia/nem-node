@@ -1,14 +1,25 @@
 FROM openjdk:8-slim
 
+ARG NIS_VER=0.6.96
+
 RUN apt-get update && \
   apt-get install -y \
     wget \
     gettext-base \
     && \
-  wget http://bob.nem.ninja/nis-0.6.96.tgz && \
-  tar xzf nis-0.6.96.tgz && \
+  wget http://bob.nem.ninja/nis-$NIS_VER.tgz && \
+  tar xzf nis-$NIS_VER.tgz && \
   wget https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64.deb && \
-  dpkg -i dumb-init_*.deb
+  dpkg -i dumb-init_*.deb && \
+  apt-get autoclean && \
+  apt-get autoremove -y && \
+  rm -rf \
+  /nis-*.tgz \
+  /dumb-init_*.deb \
+  /root/.npm \
+  /root/.node-gyp \
+  /tmp/* \
+  /var/lib/apt/lists/*
 
 COPY ./replace-envvars.sh /package/nis
 COPY ./config.properties /package
